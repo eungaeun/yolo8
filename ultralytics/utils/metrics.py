@@ -731,16 +731,8 @@ class Metric(SimpleClass):
         Returns:
             (float): The mAP over IoU thresholds of 0.5 - 0.95 in steps of 0.05.
         """
-        map = self.all_ap.mean() if len(self.all_ap) else 0.0
-        print("734 save mAP.txt")
-        print("saved in ", self.save_dir)
-        for i, c in enumerate(self.ap_class_index):
-            map[c] = self.ap[i]
-        with open(os.path.join(self.save_dir / "mAP.txt"), "w") as f:
-            f.write(f"mAP: {map.mean():.4f}\n")  # 전체 mAP 저장
-            for i, map_value in enumerate(map):
-                f.write(f"Class {i}: {map_value:.4f}\n")  # 클래스별 mAP 저장
-        return map
+        print("734")
+        return self.all_ap.mean() if len(self.all_ap) else 0.0
 
     def mean_results(self):
         """Mean of results, return mp, mr, map50, map."""
@@ -888,7 +880,7 @@ class DetMetrics(SimpleClass):
     @property
     def maps(self):
         """Returns mean Average Precision (mAP) scores per class."""
-        print("883 save mAP.txt")
+        print("detmetrics save mAP.txt")
         print("saved in ", self.save_dir)
         for i, c in enumerate(self.ap_class_index):
             self.box.maps[c] = self.ap[i]
