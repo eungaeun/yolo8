@@ -135,7 +135,8 @@ def bbox_iou(box1, box2, xywh=True, GIoU=False, DIoU=False, CIoU=False, GGIoU=Fa
             sigma2 = beta * (b1_y2.minimum(b2_y2) - b1_y1.maximum(b2_y1)).clamp_(0) + eps
             with torch.no_grad():
 
-                distance = torch.exp(-0.5 * ((b2_x1 + b2_x2 - b1_x1 - b1_x2).pow(2) / sigma1.pow(2) + (b2_y1 + b2_y2 - b1_y1 - b1_y2).pow(2) / sigma2.pow(2)) / 4).clamp_(0)
+                distance = torch.exp(-0.5 * ((b2_x1 + b2_x2 - b1_x1 - b1_x2).pow(2) / sigma1.pow(2) 
+                                             + (b2_y1 + b2_y2 - b1_y1 - b1_y2).pow(2) / sigma2.pow(2)) / 4).clamp_(0)
             # return iou * (1.0 - torch.clamp(distance, min=0.0, max=1.0))
             return (iou).pow(1-alpha) * distance.pow(alpha)
 

@@ -38,4 +38,4 @@ model.val().box.map
 
 # for idx, frame in enumerate(results):
 #     img_path = os.path.join("./pr_images", 'img_'+str(idx)+'.png')
-#     cv2.imwrite(img_path, frame.plot(font_size=0.1))
+#     
